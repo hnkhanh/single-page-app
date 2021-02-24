@@ -39,7 +39,7 @@ const Header = () => {
       <Navbar dark expand="md">
         <div className="container">
           <NavbarToggler onClick={toggleNav} />
-          <NavbarBrand className="mr-auto" href="/home">
+          <NavbarBrand className="mr-auto" href="/single-page-app/home">
             <img
               src="https://i.ibb.co/G0gHb1B/logo.png"
               height="30"
