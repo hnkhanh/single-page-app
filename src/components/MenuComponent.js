@@ -1,20 +1,18 @@
 import React from "react";
 import {
-  Card, CardImg, CardImgOverlay,
+  Card, CardImg,
     CardTitle, Breadcrumb, BreadcrumbItem
 } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
-import { baseUrl } from '../shared/baseUrl';
+import {imageLink} from './DishDetailComponent';
 
-const RenderMenuItem = ({ dish, onClick }) => {
+const RenderMenuItem = ({ dish }) => {
   return (
-    <Card>
-      <Link to={`/menu/${dish.id}`} >
-        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
-        <CardImgOverlay>
-          <CardTitle>{dish.name}</CardTitle>
-        </CardImgOverlay>
+    <Card className=" mt-2 ml-4">
+      <Link to={`/menu/${dish.id}`} className="text-center text-reset text-info" style={{fontSize: "20px"}}>
+        <CardImg width="100%" src={imageLink(dish.image)} alt={dish.name} />
+        <CardTitle>{dish.name}</CardTitle>
       </Link>
     </Card>
   );
@@ -24,7 +22,7 @@ const Menu = ({ dishes, onClick }) => {
 
   const menu = dishes.dishes.map((dish) => {
     return (
-      <div className="col-12 col-md-5 m-1" key={dish.id}>
+      <div className="col-11 col-md-5" key={dish.id}>
         <RenderMenuItem dish={dish} onClick={onClick} />
       </div>
     );

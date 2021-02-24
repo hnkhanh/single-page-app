@@ -4,7 +4,6 @@ import { Card, CardImg, CardText, CardBody,
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
-import { baseUrl } from '../shared/baseUrl';
 import { required, maxLength, minLength } from "./ContactComponent";
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
@@ -22,8 +21,8 @@ const CommentForm = ({ postComment, dishId }) => {
 
   return(
     <div className="col-12">
-      <Button outline onClick={toggleModal}>
-        <span className="fa fa-sign-in fa-lg"></span> Comment
+      <Button outline onClick={toggleModal} className="mt-3 mb-3 comment">
+        Post Your Comment
       </Button>
       <Modal isOpen={isModalOpen} toggle={toggleModal}>
           <ModalHeader toggle={toggleModal}>Submit Comment</ModalHeader>
@@ -87,13 +86,16 @@ const CommentForm = ({ postComment, dishId }) => {
     </div>
   )
 }
+export const imageLink = (image) => {
+  return image.replace('https://my-json-server.typicode.com/hnkhanh/single-page-app-db/','');
+}
 const RenderDish = (dish) => {
   return (
     <FadeTransform in transformProps={{ exitTransform: 'scale(0.5) translateY(-50%)'}}>
       <Card>
-        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+        <CardImg top src={imageLink(dish.image)} alt={dish.name} />
         <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
+          <CardTitle className="font-weight-bold">$ {dish.price}</CardTitle>
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
@@ -160,18 +162,16 @@ const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
           </div>                
         </div>
         <div className="row">
-          <div className="col-12 col-md-5 m-1">
+          <div className="col-11 col-md-5 m-3 ">
           {RenderDish(dish)}
           </div>
-          <div className="col-12 col-md-5 m-1">
+          <div className="col-11 col-md-5 mt-3 ml-3">
             <h4>Comments</h4>
-            { 
-            <RenderComments
-              comments={comments}
-              postComment={postComment}
-              dishId={dish.id}
-            />
-            }
+            { <RenderComments
+                comments={comments}
+                postComment={postComment}
+                dishId={dish.id}
+              />}
           </div>
         </div>
       </div>

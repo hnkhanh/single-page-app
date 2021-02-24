@@ -10,7 +10,7 @@ const store = ConfigureStore();
 const App = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div className="App">
           <Main />
         </div>
