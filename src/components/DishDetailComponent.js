@@ -152,7 +152,7 @@ const Pagination = ({commentsPerPage, totalComments, onPageChange}) => {
 
 const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [commentsPerPage] = useState(6);
+  const [commentsPerPage] = useState(5);
 
   const indexOfLastComment = currentPage * commentsPerPage;
   const indexOfFirstComment = indexOfLastComment - commentsPerPage;
@@ -199,19 +199,19 @@ const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
           </div>
           <div className="col-11 col-md-5 mt-3 ml-3">
             <h4>Comments</h4>
-            { <><RenderComments
+            {<RenderComments
                 comments={currentComments}
                 postComment={postComment}
-              />
-              <Pagination 
+              />}
+                {commentsPerPage < comments.length && <Pagination 
                 commentsPerPage={commentsPerPage} 
                 totalComments={comments.length}
                 onPageChange={onPageChange}
-              />
-              <CommentForm 
+              />}
+              {<CommentForm 
                 dishId={dish.id} 
                 postComment={postComment}/>
-              </>
+              
               }
           </div>
         </div>
