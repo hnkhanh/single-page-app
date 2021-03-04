@@ -80,10 +80,10 @@ const Main = (props) => {
     <div>
       <Header />
       <TransitionGroup>
-        <CSSTransition key={props.location.pathname} classNames="page" timeout={500}>
+        <CSSTransition key={props.location.key} classNames="page" timeout={300}>
           <Switch location={props.location}>
             <Route path='/home' component={HomePage} />
-            <Route path='/about-us' component={() => 
+            <Route path='/aboutus' component={() => 
               <About 
                 leaders={leaders.leaders} 
                 leaderLoading ={leaders.isLoading}
@@ -94,7 +94,7 @@ const Main = (props) => {
               <Contact 
               postFeedback={postFeedback}
               resetFeedbackForm={resetFeedbackForm}
-              />} />
+              />}/>
             <Route path='/menu/:dishId' component={DishWithId} />
             <Redirect to="/home" />
           </Switch>

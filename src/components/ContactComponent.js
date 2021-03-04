@@ -29,7 +29,7 @@ const Contact = ({ postFeedback, resetFeedbackForm}) => {
         </div>                
       </div>
       <div className="row row-content">
-          <div className="col-12 mb-3">
+          <div className="col-12">
           <h3>Location Information</h3>
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
@@ -45,7 +45,6 @@ const Contact = ({ postFeedback, resetFeedbackForm}) => {
           </div>
           <div className="col-12 col-sm-6 offset-sm-1">
               <h5>Map of our Location</h5>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1820296972073!2d114.2827867149549!3d22.308954485319077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404038194bfecc3%3A0x690e926322ef3ce4!2s121%20Clear%20Water%20Bay%20Rd%2C%20Clear%20Water%20Bay%2C%20Hong%20Kong!5e0!3m2!1sen!2s!4v1614161505352!5m2!1sen!2s" width={350} height={300} style={{border: 0}} allowFullScreen loading="lazy" />
           </div>
           <div className="col-12 col-sm-11 offset-sm-1">
               <div className="btn-group" role="group">
@@ -58,9 +57,8 @@ const Contact = ({ postFeedback, resetFeedbackForm}) => {
       <div className="row row-content">
           <div className="col-12">
             <h3>Send us your Feedback</h3>
-            <h6>Your Form is still preserved when navigating to other pages before hitting send</h6>
           </div>
-          <div className="col-12 col-md-9 mt-3">
+          <div className="col-12 col-md-9">
           <Form model="feedback" onSubmit={ values => handleSubmit(values)}>
             <Row className="form-group">
                 <Label htmlFor="firstname" md={2}>First Name</Label>
@@ -111,7 +109,7 @@ const Contact = ({ postFeedback, resetFeedbackForm}) => {
                         placeholder="Tel. Number"
                         className="form-control"
                         validators={{
-                        required, minLength: minLength(7), maxLength: maxLength(15), isNumber
+                        required, minLength: minLength(3), maxLength: maxLength(15), isNumber
                     }}  />
                     <Errors
                     className="text-danger"
@@ -119,7 +117,7 @@ const Contact = ({ postFeedback, resetFeedbackForm}) => {
                     show="touched"
                     messages={{
                         required: 'Required. ',
-                        minLength: 'Must be greater than 7 numbers. ',
+                        minLength: 'Must be greater than 2 numbers. ',
                         maxLength: 'Must be 15 numbers or less. ',
                         isNumber: 'Must be a number'
                     }}
