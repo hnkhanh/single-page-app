@@ -103,7 +103,7 @@ const RenderDish = (dish) => {
   );
 };
 
-const RenderComments = ({comments, postComment, dishId}) => {
+const RenderComments = ({comments}) => {
   if (comments != null) {
     let options = { year: "numeric", month: "short", day: "2-digit" };
     return (
@@ -121,7 +121,6 @@ const RenderComments = ({comments, postComment, dishId}) => {
           </ul>
           </Fade>
         ))}
-          <CommentForm dishId={dishId} postComment={postComment}/>
         </Stagger>
       </div>
     );
@@ -129,7 +128,40 @@ const RenderComments = ({comments, postComment, dishId}) => {
   else return <div />;
 };
 
+const Pagination = ({commentsPerPage, totalComments, onPageChange}) => {
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalComments / commentsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  return (
+    <nav>
+    <ul className='pagination'>
+      {pageNumbers.map(number => (
+        <li key={number} 
+        className='page-item' 
+       >
+           <a onClick={onPageChange} id={number} className='page-link'>
+            {number}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  )
+}
+
 const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [commentsPerPage] = useState(5);
+
+  const indexOfLastComment = currentPage * commentsPerPage;
+  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+
+  const onPageChange = (e) => {
+    setCurrentPage(Number(e.target.id))
+    }
+
   if (isLoading) {
     return(
       <div className="container">
@@ -167,11 +199,19 @@ const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
           </div>
           <div className="col-11 col-md-5 mt-3 ml-3">
             <h4>Comments</h4>
-            { <RenderComments
-                comments={comments}
+            {<RenderComments
+                comments={currentComments}
                 postComment={postComment}
-                dishId={dish.id}
               />}
+                {commentsPerPage < comments.length && <Pagination 
+                commentsPerPage={commentsPerPage} 
+                totalComments={comments.length}
+                onPageChange={onPageChange}
+              />}
+              {<CommentForm 
+                dishId={dish.id} 
+                postComment={postComment}/>
+              }
           </div>
         </div>
       </div>
