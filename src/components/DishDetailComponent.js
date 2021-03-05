@@ -150,7 +150,7 @@ const Pagination = ({commentsPerPage, totalComments, onPageChange}) => {
   )
 }
 
-const DishDetail = ({ dish, comments, postComment, isLoading, errMess, commentsErrMess }) => {
+const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(5);
 
