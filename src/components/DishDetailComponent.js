@@ -108,7 +108,7 @@ const RenderComments = ({comments}) => {
     let options = { year: "numeric", month: "short", day: "2-digit" };
     return (
       <div> 
-        <Stagger in>
+        <Stagger in style={{minHeight: '392px'}}>
         {comments.map(comment => (
           <Fade in>
           <ul key={comment.id} className="list-unstyled">
@@ -150,7 +150,7 @@ const Pagination = ({commentsPerPage, totalComments, onPageChange}) => {
   )
 }
 
-const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
+const DishDetail = ({ dish, comments, postComment, isLoading, errMess, commentsErrMess }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(5);
 
@@ -201,7 +201,6 @@ const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
             <h4>Comments</h4>
             {<RenderComments
                 comments={currentComments}
-                postComment={postComment}
               />}
                 {commentsPerPage < comments.length && <Pagination 
                 commentsPerPage={commentsPerPage} 
@@ -211,7 +210,6 @@ const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
               {<CommentForm 
                 dishId={dish.id} 
                 postComment={postComment}/>
-              
               }
           </div>
         </div>

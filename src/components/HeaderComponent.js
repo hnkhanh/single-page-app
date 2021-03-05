@@ -16,23 +16,23 @@ const Header = () => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const toggleModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
-  const handleLogin = (event) => {
-    console.log(event);
-    event.preventDefault();
-    alert(
-      "Username: " +
-        username.current.value +
-        " Password: " +
-        password.current.value +
-        " Remember: " +
-        remember.current.checked
-    );
-    toggleModal();
-  };
+  // const handleLogin = (event) => {
+  //   console.log(event);
+  //   event.preventDefault();
+  //   alert(
+  //     "Username: " +
+  //       username.current.value +
+  //       " Password: " +
+  //       password.current.value +
+  //       " Remember: " +
+  //       remember.current.checked
+  //   );
+  //   toggleModal();
+  // };
 
   return (
     <>
@@ -70,13 +70,13 @@ const Header = () => {
                 </NavLink>
               </NavItem>
             </Nav>
-            <Nav className="ml-auto" navbar>
+            {/* <Nav className="ml-auto" navbar>
               <NavItem>
                 <Button outline onClick={toggleModal}>
                   <span className="fa fa-sign-in fa-lg"></span> Login
                 </Button>
               </NavItem>
-            </Nav>
+            </Nav> */}
           </Collapse>
         </div>
       </Navbar>
@@ -94,7 +94,7 @@ const Header = () => {
           </div>
         </div>
       </Jumbotron>
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+      {/* <Modal isOpen={isModalOpen} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
         <ModalBody>
           <Form onSubmit={handleLogin}>
@@ -131,7 +131,7 @@ const Header = () => {
             </Button>
           </Form>
         </ModalBody>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

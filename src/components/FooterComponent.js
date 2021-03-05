@@ -41,7 +41,9 @@ const Footer = () => {
             <div className="row justify-content-center">             
                 <div className="col-auto">
                     <p>© Copyright 2021 Restaurant Con Fusion</p>
+                    <p class="author"><a href="https://github.com/hnkhanh/single-page-app" target="_blank">Code</a> by <a href="https://hnkhanh.github.io/my-portfolio/" target="_blank">Khanh</a></p>
                 </div>
+                
             </div>
         </div>
     </div>

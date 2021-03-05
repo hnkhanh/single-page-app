@@ -80,10 +80,10 @@ const Main = (props) => {
     <div>
       <Header />
       <TransitionGroup>
-        <CSSTransition key={props.location.key} classNames="page" timeout={300}>
+        <CSSTransition key={props.location.pathname} classNames="page" timeout={300}>
           <Switch location={props.location}>
             <Route path='/home' component={HomePage} />
-            <Route path='/aboutus' component={() => 
+            <Route path='/about-us' component={() => 
               <About 
                 leaders={leaders.leaders} 
                 leaderLoading ={leaders.isLoading}
