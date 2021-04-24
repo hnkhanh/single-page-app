@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
+import axios from 'axios';
 
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
@@ -73,39 +74,87 @@ export const addComment = (comment) => ({
   payload: comment
 });
 
-export const postComment = (dishId, rating, author, comment) => (dispatch) => {
-
-  const newComment = {
-      dishId: dishId,
-      rating: rating,
-      author: author,
-      comment: comment
-  };
+export const postComment = (dishId, rating, author, comment) => async(dispatch) => {
+  // const {dishId, rating, author, comment} = args
+  const newComment = {dishId, rating, author, comment};
 
   newComment.date = new Date().toISOString();
   
-  return fetch(baseUrl + 'comments', {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(newComment),
-      credentials: "same-origin",
-  })
-  .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let error = new Error('Error ' + response.status + ': ' + response.statusText);
-        error.response = response;
-        throw error;
-      }
-  },
-  error => {
-      throw error;
-  })
-  .then(response => response.json())
-  .then(response => dispatch(addComment(response)))
-  .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+ error.message); });
+    try {
+    const {data} = await axios.post(baseUrl + 'comments', newComment);
+    dispatch(addComment(data))
+  } catch (error) {
+    console.log(error)
+  }
+
+
+  // return fetch(baseUrl + 'comments', {
+  //     method: "POST",
+  //     headers: {"Content-Type": "application/json"},
+  //     body: JSON.stringify(newComment),
+  //     credentials: "same-origin",
+  // })
+  // .then(response => {
+  //     if (response.ok) {
+  //       return response;
+  //     } else {
+  //       let error = new Error('Error ' + response.status + ': ' + response.statusText);
+  //       error.response = response;
+  //       throw error;
+  //     }
+  // },
+  // error => {
+  //     throw error;
+  // })
+  // .then(response =>{ return response.json(); })
+  // .then(response =>{ dispatch(addComment(response)); console.log(response)})
+  // .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+ error.message); });
 };
+
+// export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+//   const newComment = {
+//     dishId: dishId,
+//     rating: rating,
+//     author: author,
+//     comment: comment
+// };
+
+// newComment.date = new Date().toISOString();
+
+//   // try {
+  
+//   //   const response = await axios.post(baseUrl + 'comments', newComment);
+//   //   console.log(response)
+
+//   //   dispatch(addComment(response))
+//   //   // window.location.reload();
+//   // } catch (error) {
+//   //   console.log(error)
+//   // }
+
+
+//   return fetch(baseUrl + 'comments', {
+//       method: "POST",
+//       headers: {"Content-Type": "application/json"},
+//       body: JSON.stringify(newComment),
+//       credentials: "same-origin",
+//   })
+//   .then(response => {
+//       if (response.ok) {
+//         return response;
+//       } else {
+//         let error = new Error('Error ' + response.status + ': ' + response.statusText);
+//         error.response = response;
+//         throw error;
+//       }
+//   },
+//   error => {
+//       throw error;
+//   })
+//   .then(response => {response.json(); console.log(response)})
+//   .then(response => dispatch(addComment(response)))
+//   .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+ error.message); });
+// };
 
 export const fetchPromos = () => (dispatch) => {
     
